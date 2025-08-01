@@ -65,10 +65,18 @@ const account = {
    * певного типу транзакції з усієї історії транзакцій
    */
   getTransactionTotal(type) {
-    return this.transactions
-      .filter(transaction => transaction.type === type)
-      .reduce((total, transaction) => total + transaction.amount, 0);
-  },    
+    let total = 0;
+
+    for (let i = 0; i < this.transactions.length; i++) {
+      const transaction = this.transactions[i];
+
+      if (transaction.type === type) {
+        total += transaction.amount;
+      }
+    }
+
+    return total;
+  } 
 };
 
 account.deposit(14);
